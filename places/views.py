@@ -18,7 +18,7 @@ def main_page(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": 'static/places/moscow_legends.json'
+                "detailsUrl": reverse(place_details, args=[place.id])
 
             }
         })
@@ -29,3 +29,20 @@ def main_page(request):
         }
     }
     return render(request, 'index.html', context=context)
+
+
+def place_details(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
+    data = {
+        "title": place.title,
+        "imgs": [image.img.url for image in place.images.all()],
+        "description_short": place.description_short,
+        "description_long": place.description_long,
+        "coordinates": {
+            "lat": place.lat,
+            "lng": place.lon
+        }
+    }
+    return JsonResponse(data,
+                        safe=False,
+                        json_dumps_params={'ensure_ascii': False, 'indent': 2})

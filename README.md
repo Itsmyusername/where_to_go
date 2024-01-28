@@ -33,7 +33,7 @@ python3 manage.py runserver
 
 Создайте .env файл и заполните вашими данными.
 ```
-SECRET_KEY='django-insecure-_lq!gle#2oulvb$h!a)+6fwi%73^$@b_glds0j3o^+fff3zqnr'
+SECRET_KEY='secretkeyishere'
 DEBUG=False
 DATABASE_URL='sqlite:///db.sqlite3'
 ALLOWED_HOSTS='.pythonanywhere.com'

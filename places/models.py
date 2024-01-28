@@ -19,5 +19,10 @@ class Image(models.Model):
                                                 default=0,
                                                 blank=True)
 
+
+    class Meta(object):
+        ordering = ['position']
+
+
     def __str__(self):
         return f'{self.position}, {self.place}'

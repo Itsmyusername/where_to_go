@@ -10,7 +10,7 @@ MAX_IMAGE_HEIGHT = 200
 MAX_IMAGE_WIDTH = 200
 
 
-def preview_image(image):
+def get_preview_image(image):
     return format_html(
         '<img src="{url}" style="max-height: {height}px; max-width: {width}px;" />'
         .format(url=image.img.url, height=MAX_IMAGE_HEIGHT, width=MAX_IMAGE_WIDTH)
@@ -19,7 +19,7 @@ def preview_image(image):
 
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
-    readonly_fields = [preview_image]
+    readonly_fields = [get_preview_image]
     extra = 1
 
 
@@ -31,5 +31,5 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    readonly_fields = [preview_image]
+    readonly_fields = [get_preview_image]
     autocomplete_fields = ["place"]

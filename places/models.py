@@ -11,7 +11,7 @@ class Place(models.Model):
     lon = models.FloatField(verbose_name="Долгота")
 
     def __str__(self):
-        return str(self.title)  # Convert title to string representation
+        return self.title
 
 
 class Image(models.Model):
@@ -19,14 +19,10 @@ class Image(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE,
                               related_name="images", verbose_name="Место")
     position = models.PositiveSmallIntegerField(verbose_name="Позиция фото",
-                                                default=0,
-                                                blank=True,
-                                                db_index=True)
+                                                default=0, blank=True, db_index=True)
 
+    class Meta:
+        ordering = ["position"]
 
-class Meta(object):
-    ordering = ["position"]
-
-
-def __str__(self):
-    return f'{self.position}, {self.place}'
+    def __str__(self):
+        return f'{self.position}, {self.place}'

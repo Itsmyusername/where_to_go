@@ -8,9 +8,8 @@ from .models import Place, Image
 
 def image_preview(obj):
     return format_html(
-        '<img src="{url}" style="max-height: 200px; max-width: 200px;" />'.format(
-            url=obj.img.url
-        )
+        '<img src="{url}" style="max-height: 200px; max-width: 200px;" />'
+        .format(url=obj.img.url)
     )
 
 
@@ -24,6 +23,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
     search_fields = ['title']
+
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):

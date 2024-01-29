@@ -6,7 +6,7 @@ from adminsortable2.admin import SortableInlineAdminMixin
 from .models import Place, Image
 
 
-def image_preview(obj):
+def preview_image(obj):
     return format_html(
         '<img src="{url}" style="max-height: 200px; max-width: 200px;" />'
         .format(url=obj.img.url)
@@ -15,7 +15,7 @@ def image_preview(obj):
 
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
-    readonly_fields = [image_preview]
+    readonly_fields = [preview_image]
     extra = 1
 
 
@@ -27,4 +27,4 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    readonly_fields = [image_preview]
+    readonly_fields = [preview_image]

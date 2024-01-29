@@ -1,5 +1,4 @@
 import os
-
 import requests
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand

@@ -23,16 +23,16 @@ def main_page(request):
             }
         })
     context = {
-        'data': {
+        "data": {
             "type": "FeatureCollection",
             "features": features
         }
     }
-    return render(request, 'index.html', context=context)
+    return render(request, "index.html", context=context)
 
 
 def place_details(request, place_id):
-    place = get_object_or_404(Place.objects.prefetch_related('images'), id=place_id)
+    place = get_object_or_404(Place.objects.prefetch_related("images"), id=place_id)
     data = {
         "title": place.title,
         "imgs": [image.img.url for image in place.images.all()],
@@ -43,4 +43,4 @@ def place_details(request, place_id):
             "lng": place.lon
         }
     }
-    return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(data, safe=False, json_dumps_params={"ensure_ascii": False, "indent": 2})

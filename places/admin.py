@@ -12,8 +12,8 @@ MAX_IMAGE_WIDTH = 200
 
 def get_preview_image(image):
     return format_html(
-        '<img src="{url}" style="max-height: {height}px; max-width: {width}px;" />'
-        .format(url=image.img.url, height=MAX_IMAGE_HEIGHT, width=MAX_IMAGE_WIDTH)
+        '<img src="{}" style="max-height: {}px; max-width: {}px;" />',
+        image.img.url, MAX_IMAGE_HEIGHT, MAX_IMAGE_WIDTH
     )
 
 

@@ -28,16 +28,13 @@ def load_place(url):
     for position, pic_url in enumerate(raw_place['imgs']):
         response = requests.get(pic_url)
         response.raise_for_status()
-
-        img = ContentFile(response.content)
-
-        image_field, image_created = place.images.get_or_create(
-            position=position)
+        img_name = os.path.basename(pic_url)
+        img = ContentFile(response.content, name=img_name)
+        image_field, image_created = place.images.get_or_create(position=position, defaults={'img': img})
         if image_created:
-            print(f'Добавляю фото {os.path.basename(pic_url)}')
-            image_field.img.save(os.path.basename(pic_url), img, save=True)
+            print(f'Добавляю фото {img_name}')
         else:
-            print(f'Фото {os.path.basename(pic_url)} уже есть')
+            print(f'Фото {img_name} уже есть')
 
 
 class Command(BaseCommand):

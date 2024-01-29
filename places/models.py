@@ -18,7 +18,8 @@ class Image(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images', verbose_name='Место')
     position = models.PositiveSmallIntegerField(verbose_name='Позиция фото',
                                                 default=0,
-                                                blank=True)
+                                                blank=True,
+                                                db_index=True)
 
 
     class Meta(object):
